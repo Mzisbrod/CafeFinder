@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="welcome"><h1>Welcome to Café Finder</h1></div>
+    <br>
+    <div class="popular"><h5>Popular Cafés</h5></div>
+    <br>
+    <div class="popular-cafes-container">
+        {% for id, cafe in popular_cafes.items() %}
+        <div class="cafe-item">
+            <a href="{{ url_for('view_item', id=id) }}" class="cafe-item">
+                <img src="{{ cafe.image }}" alt="Image of {{ cafe.name }}" class="cafe-image">
+                <div class="cafe-name">{{ cafe.name }}</div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}
+

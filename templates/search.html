@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Search Results for "{{ query }}"</h2>
+    {% if cafes %}
+        <p>{{ cafes|length }} result(s) found</p>
+        <div class="list-group">
+            {% for id, cafe in cafes.items() %}
+                <a href="/view/{{ id }}" class="list-group-item list-group-item-action">
+                    <div>{{ cafe['name'] | highlight(query) }}</div>
+                    <p class="mb-1">{{ cafe['price_range'] | highlight(query) }} | {{ cafe['neighbourhood'] | highlight(query) }}</p>
+                    <p class="mb-1">{{ cafe['address'] | highlight(query) }}</p>
+                </a>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>No results found</p>
+    {% endif %}
+</div>
+<script src="{{ url_for('static', filename='search.js') }}"></script>
+{% endblock %}

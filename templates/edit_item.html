@@ -1,0 +1,99 @@
+{% extends "layout.html" %}
+{% block content %}
+    <form method="POST" id="editItemForm">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" name="name" value="{{ item['name'] }}" required>
+        </div>
+        <div class="form-group">
+            <label for="image_url">Image URL</label>
+            <input type="text" class="form-control" id="image_url" name="image_url" value="{{ item['image'] }}">
+        </div>
+        <div class="form-group">
+            <label for="neighbourhood">Neighbourhood</label>
+            <input type="text" class="form-control" id="neighbourhood" name="neighbourhood"
+                   value="{{ item['neighbourhood'] }}" required>
+        </div>
+        <div class="form-group">
+            <label for="address">Address</label>
+            <input type="text" class="form-control" id="address" name="address" value="{{ item['address'] }}" required>
+        </div>
+        <div class="form-group">
+            <label for="summary">Summary</label>
+            <textarea class="form-control" id="summary" name="summary" rows="3" required>{{ item['summary'] }}</textarea>
+        </div>
+        <div class="form-group">
+            <label for="price_range">Price Range</label>
+            <input type="text" class="form-control" id="price_range" name="price_range"
+                   value="{{ item['price_range'] }}" required>
+        </div>
+        <div class="form-group">
+            <label for="stars">Stars</label>
+            <input type="number" class="form-control" id="stars" name="stars" min="1" max="5" step="1"
+                   value="{{ item['stars'] }}">
+        </div>
+        <div class="form-group">
+            <label for="menu_highlights">Menu Highlights</label>
+            <select class="form-control" id="menu_highlights" name="menu_highlights[]" multiple="multiple" required>
+                {% for highlight in item['menu_highlights'] %}
+                <option value="{{ highlight }}" selected="selected">{{ highlight }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+        <label for="amenities">Amenities</label>
+            <select class="form-control" id="amenities" name="amenities[]" multiple="multiple" required>
+                {% for amenity in item['amenities'] %}
+                <option value="{{ amenity }}" selected="selected">{{ amenity }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="similar_cafes">Similar Cafes</label>
+            <select multiple class="form-control" id="similar_cafes" name="similar_cafes[]" required>
+                {% for cafe_id, cafe in cafes.items() %}
+                    {% if cafe_id|string != id|string %}
+                        <option value="{{ cafe_id }}" {% if cafe_id in item['similar_cafes'] %} selected {% endif %}>
+                            {{ cafe['name'] }}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+        </div>
+        <br>
+        <button type="submit" class="btn btn-outline-success">Submit</button>
+        <a href="{{ url_for('view_item', id=id) }}" class="btn btn-danger no-buttons"
+           id="discardChangesButton">Discard Changes</a>
+    </form>
+    <!-- Error Modal -->
+    <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="errorModalLabel">Error(s)</h5>
+          </div>
+          <div class="modal-body" id="errorModalBody">
+            <!-- Error messages will be displayed here -->
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal" id="btn-close">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Confirm Modal -->
+    <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-body cafe-content">Are you sure you want to discard changes?</div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-outline-success" id="confirmDiscard">Yes</button>
+              <button type="button" class="btn btn-danger no-buttons" data-bs-dismiss="modal" id="closeModal">No</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% block scripts %}
+    {{ super() }}
+    <script src="{{ url_for('static', filename='edit_item.js') }}"></script>
+    {% endblock %}
+{% endblock %}

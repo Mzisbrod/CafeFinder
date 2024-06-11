@@ -1,1 +1,51 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" rel="stylesheet">
+    <!-- JQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <!-- Select2 CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.full.min.js"></script>
+    <link rel="stylesheet" href="{{url_for('static', filename='main.css')}}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+</head>
+<body>
+    <div class="row">
+        <nav class="navbar navbar-expand-lg navbar-light" style="background: #fcfaf9">
+            <div class="container-fluid">
+                <a class="logo navbar-brand col d-flex align-items-center" href="/">
+                    <img src="https://d29fhpw069ctt2.cloudfront.net/icon/image/85153/preview.svg" alt="CaféFinder icon" class="coffee-icon">
+                    <span class="logo">Café Finder</span>
+                </a>
+                <form class="d-flex align-items-center w-100" action="/search" method="get" id="searchForm">
+                    <div class="input-group col-4">
+                        <input class="form-control me-2" type="search" placeholder="Search cafés" aria-label="Search" name="query" required id="searchQuery" style="max-width: 80%; margin-top: 15px; font-family: Georgia;">
+                        <button class="btn btn-outline-success" type="submit" style="margin-top: 15px;">Search</button>
+                    </div>
+                </form>
+                <form class="d-flex align-items-center" action="/add" method="get">
+                    <button class="btn btn-outline-success" type="submit" style="margin-top: 15px;">+</button>
+                </form>
+            </div>
+        </nav>
+    </div>
 
+   <!-- Block Content Start -->
+    <div class="container mt-4">
+        {% block content %}
+        <!-- Content from child templates will be injected here -->
+        {% endblock %}
+    </div>
+    <!-- Block Content End -->
+
+    <!-- Global Scripts -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+
+    {% block scripts %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,62 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="container mt-4">
+    {% for key, value in item.items() %}
+        {% if key == 'name' %}
+            <div class="row align-items-center"> <!-- Use flex alignment -->
+                <!-- Column for the item name and stars -->
+                <div class="col d-flex align-items-center cafe-content">
+                    <h1 class="d-inline">{{ item['name'] }}</h1>
+                    <span class="stars ml-2"> <!-- Add margin left for spacing -->
+                        <!-- Display a filled star for each point in rating -->
+                        {% for _ in range(item['stars']) %}
+                            <i class="fas fa-star" style="color: #ece11c"></i>
+                        {% endfor %}
+                        <!-- Display an empty star for the remainder to 5 -->
+                        {% for _ in range(5-item['stars']) %}
+                            <i class="far fa-star" style="color: #ece11c"></i>
+                        {% endfor %}
+                    </span>
+                </div>
+                <!-- Column for the edit button, aligning it to the right -->
+                <div class="col-auto ml-auto"> <!-- Use ml-auto to push to the right -->
+                    <a href="{{ url_for('edit_item', id=id) }}" class="btn btn-outline-success">Edit</a>
+                </div>
+            </div>
+            {% elif key == 'image' %}
+                <div class="mb-3">
+                    <img src="{{ item['image'] }}" alt="Image of {{ item['name'] }}" class="img-fluid" style="max-width: 400px; max-height: 300px; border: 1px solid black">
+                </div>
+            {% elif key != 'stars' %}
+                <div class="mb-3 cafe-content">
+                    <span><strong>{{ key.replace("_", " ") | capitalize }}:</strong></span>
+                    {% if key == 'similar_cafes' %}
+                    <div class="row">
+                        {% for cafe_id in value %}
+                            {% set cafe = cafes[cafe_id] %}
+                            <div class="col-md-3 mb-4">
+                                <div class="card" style="text-align: center;">
+                                    <div>
+                                        <a href="{{ url_for('view_item', id=cafe_id) }}" class="similar-cafes-container">
+                                            <img src="{{ cafe['image'] }}" alt="Image of {{ cafe['name'] }}" class="card-img-top" style="max-height: 100px; object-fit: cover;">
+                                            {{ cafe['name'] }}
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    {% elif value is iterable and value is not string %}
+                        <ul class="custom-bullets">
+                            {% for val in value %}
+                                <li>{{ val }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <span>{{ value }}</span><br>
+                    {% endif %}
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endblock %}
