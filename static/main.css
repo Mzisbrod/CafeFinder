@@ -1,0 +1,170 @@
+.center {
+    text-align: center;
+}
+
+.popular-cafes-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 0;
+    color: #414141;
+    text-decoration: none;
+}
+
+.cafe-item {
+    flex-basis: 20%; /* Adjust this value based on how many items you want per row */
+    box-shadow: 0 3px 5px rgba(0,0,0,0.1);
+    text-align: center;
+    color: #414141;
+    text-decoration: none;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.cafe-image {
+    width: 100%;
+    height: 300px;
+    border-bottom: 1px solid #eee; /* A subtle line between the image and the text */
+}
+
+.cafe-name {
+    padding: 10px;
+    font-size: 16px;
+    text-decoration: none;
+    color: #676767 !important;
+    font-family: Georgia;
+}
+
+.form-label {
+    color: #676767;
+}
+
+.add-cafe {
+    color: #414141;
+}
+
+.field {
+    display: inline-block;
+}
+
+/* Change button background color */
+.btn-outline-success {
+    color: #414141 !important; /* Button text color */
+    border-color: #9f7452 !important; /* Button border color */
+    font-family: Georgia;
+}
+
+.btn-outline-success:hover {
+    color: #fff !important; /* Button text color on hover */
+    font-family: Georgia;
+    background-color: #9f7452 !important; /* Button background color on hover */
+    border-color: #9f7452 !important; /* Button border color on hover */
+}
+
+/* For focused or active states, you might want to add additional styles */
+.btn-outline-success:focus, .btn-outline-success:active {
+    color: #fff; /* Button text color for active/focused state */
+    background-color: #0056b3; /* Darker background color for active/focused state */
+    border-color: #0056b3; /* Border color for active/focused state */
+}
+
+/* Adjust the Select2 container height for similar_cafes */
+#similar_cafes + .select2-container .select2-selection--multiple {
+    min-height: 40px;
+}
+
+.coffee-icon {
+    width: 30px;
+    height: auto;
+}
+
+.logo {
+    font-family: "Impact";
+    color: #563d2b !important;
+    font-size: 25px;
+}
+
+/* Target the anchor tag that wraps the logo and text */
+.logo:hover .coffee-icon,
+.logo:hover .logo {
+    opacity: 0.5; /* Makes the icon and text lighter */
+}
+
+/* Add a transition for a smooth effect */
+.logo .coffee-icon,
+.logo .logo {
+    transition: opacity 0.2s ease-in-out;
+}
+
+.welcome {
+    color: #414141;
+    text-align: center;
+    font-weight: lighter;
+    font-family: "Georgia";
+}
+
+.popular {
+    color: #676767;
+    text-align: center;
+    font-weight: lighter;
+    font-family: "Georgia";
+}
+
+.cafe-content {
+    color: #414141;
+    font-family: Georgia;
+}
+
+.no-buttons {
+    font-family: Georgia;
+    color: #ffffff;
+}
+
+.similar-cafes {
+    width: auto;
+}
+
+.stars {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: inline-block;
+}
+
+.view-link {
+    color: #414141;
+    font-size: 15px;
+}
+
+ul.custom-bullets {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+ul.custom-bullets li::before {
+    content: "⚬";
+    padding-right: 8px;
+}
+
+.popular-cafes-container .cafe-item:hover .cafe-name {
+    color: #282828 !important; /* Darker grey on hover */
+}
+
+.form-control::placeholder {
+    color: #afafaf;
+}
+
+.similar-cafes-container {
+    color: #282828 !important;
+    text-decoration: none; /* Optional: removes underline from links */
+}
+
+/* Hover effect for links within the similar cafes container */
+.similar-cafes-container:hover {
+    transition: opacity 0.2s ease-in-out;
+    color: #797979 !important;
+    text-decoration: none; /* Optional: keeps the underline removed on hover */
+}
+
+.modal-content {
+    font-family: Georgia;
+}
